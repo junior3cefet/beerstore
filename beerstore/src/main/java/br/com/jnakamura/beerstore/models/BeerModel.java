@@ -11,12 +11,14 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class BeerModel {
+@Table(name = "beer_model")
+public class BeerModel implements Serializable {
 
     @Id
     @SequenceGenerator(name="beer_seq", sequenceName = "beer_seq",allocationSize = 1)
@@ -34,6 +36,10 @@ public class BeerModel {
     @DecimalMin(value="0", message = "beer-4")
     @DecimalMax(value = "100", message = "beer-5")
     private BigDecimal volume;
+
+    @ManyToOne(fetch = FetchType.EAGER )
+    @NotNull(message = "beer-8")
+    private BrandModel brand;
 
     @JsonIgnore
     public boolean isNew() {

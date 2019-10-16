@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface Beers extends JpaRepository<BeerModel, Long> {
+public interface BeerRepository extends JpaRepository<BeerModel, Long> {
 
-    Optional<BeerModel> findById(Long id);
 
     Optional<BeerModel> findByNameAndType(String name, BeerType type);
 }
